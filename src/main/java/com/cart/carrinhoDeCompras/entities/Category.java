@@ -1,9 +1,9 @@
 package com.cart.carrinhoDeCompras.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "CATEGORY")
 public class Category {
 
     @Id

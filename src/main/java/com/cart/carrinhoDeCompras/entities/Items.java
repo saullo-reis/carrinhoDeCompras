@@ -1,6 +1,7 @@
 package com.cart.carrinhoDeCompras.entities;
 
 import jakarta.persistence.*;
+import org.apache.catalina.User;
 
 import java.util.Date;
 
@@ -17,13 +18,13 @@ public class Items {
 
     @ManyToOne
     @JoinColumn(name="CART_ID")
-    private Integer CART_ID;
+    private Carts CART_ID;
     @ManyToOne
     @JoinColumn(name="USER_ID")
-    private Integer USER_ID;
+    private Users USER_ID;
     @ManyToOne
     @JoinColumn(name="CATEGORY_ID")
-    private Integer CATEGORY_ID;
+    private Category CATEGORY_ID;
 
 
     public Items(String ITEM_NAME, String ITEM_CATEGORY){

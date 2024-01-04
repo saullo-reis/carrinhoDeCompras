@@ -15,8 +15,8 @@ public class Carts {
     private Date UPDATED_DATE;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private Integer USER_ID;
+    @JoinColumn(name="USER_ID")
+    private Users USER_ID;
 
     public Carts(String CART_NAME){
         this.CART_NAME = CART_NAME;
