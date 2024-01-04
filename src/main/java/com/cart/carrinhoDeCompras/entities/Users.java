@@ -13,65 +13,91 @@ public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer USER_ID;
-    private String USER_NAME;
-    private boolean USER_VIP;
-    private String USER_EMAIL;
-    private String USER_PASSWORD;
+    private Integer userId;
+
+    @Column(nullable = false, unique = true)
+    private String userName;
+
+    private boolean userVip;
+    private String userEmail;
+    private String userPassword;
 
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "UPDATED_DATE")
-    private Date UPDATED_DATE;
+    private Date updateDate;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_DATE", updatable = false)
-    private Date CREATED_DATE;
+    private Date createdDate;
 
     public Users(){
 
     }
     public Users(String USER_NAME, String USER_EMAIL, String USER_PASSWORD  ){
-        this.USER_EMAIL = USER_EMAIL;
-        this.USER_NAME = USER_NAME;
-        this.USER_VIP = false;
-        this.USER_PASSWORD = USER_PASSWORD;
-        this.UPDATED_DATE = new Date();
-        this.CREATED_DATE = new Date();
+        this.userEmail = USER_EMAIL;
+        this.userName = USER_NAME;
+        this.userVip = false;
+        this.userPassword = USER_PASSWORD;
+        this.updateDate = new Date();
+        this.createdDate = new Date();
     }
 
-    public boolean isUSER_VIP() {
-        return USER_VIP;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUSER_VIP(boolean USER_VIP) {
-        this.USER_VIP = USER_VIP;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Integer getUSER_ID() {
-        return USER_ID;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getUSER_NAME() {
-        return USER_NAME;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setUSER_NAME(String USER_NAME) {
-        this.USER_NAME = USER_NAME;
+    public boolean isUserVip() {
+        return userVip;
     }
 
-    public String getUSER_EMAIL() {
-        return USER_EMAIL;
+    public void setUserVip(boolean userVip) {
+        this.userVip = userVip;
     }
 
-    public void setUSER_EMAIL(String USER_EMAIL) {
-        this.USER_EMAIL = USER_EMAIL;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUSER_PASSWORD(String USER_PASSWORD) {
-        this.USER_PASSWORD = USER_PASSWORD;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
 }
