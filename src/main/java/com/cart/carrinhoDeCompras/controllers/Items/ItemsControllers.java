@@ -1,4 +1,4 @@
-package com.cart.carrinhoDeCompras.controllers.ItemsControllers;
+package com.cart.carrinhoDeCompras.controllers.Items;
 
 import com.cart.carrinhoDeCompras.entities.Items;
 import com.cart.carrinhoDeCompras.entities.Users;

@@ -1,6 +1,4 @@
-package com.cart.carrinhoDeCompras.controllers.ItemsControllers;
-
-import com.cart.carrinhoDeCompras.entities.Items;
+package com.cart.carrinhoDeCompras.controllers.Items;
 
 public class Response{
     public String message;

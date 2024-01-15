@@ -3,11 +3,28 @@ package com.cart.carrinhoDeCompras.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "CATEGORY")
+@Table(name = "category")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer CATEGORY_ID;
-    private String CATEGORY_NAME;
+    private Integer categoryId;
+    private String categoryName;
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+
 }

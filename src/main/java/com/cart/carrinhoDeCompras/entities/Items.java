@@ -10,44 +10,60 @@ import java.util.Date;
 public class Items {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ITEM_ID;
-    private String ITEM_NAME;
-    private String ITEM_CATEGORY;
-    private Date CREATED_DATE;
-    private Date UPDATE_DATE;
+    private Integer itemId;
+    private String itemName;
+    private Date createdDate;
+    private Date updatedDate;
 
     @ManyToOne
-    @JoinColumn(name="CART_ID")
-    private Carts CART_ID;
+    @JoinColumn(name="cartId")
+    private Carts cartId;
     @ManyToOne
-    @JoinColumn(name="USER_ID")
-    private Users USER_ID;
+    @JoinColumn(name="userId")
+    private Users userId;
     @ManyToOne
-    @JoinColumn(name="CATEGORY_ID")
-    private Category CATEGORY_ID;
+    @JoinColumn(name="categoryId")
+    private Category categoryId;
 
+    public Items(){
 
-    public Items(String ITEM_NAME, String ITEM_CATEGORY){
-        this.ITEM_NAME = ITEM_NAME;
-        this.ITEM_CATEGORY = ITEM_CATEGORY;
-        this.CREATED_DATE = new Date();
-        this.UPDATE_DATE = new Date();
+    }
+    public Items(String itemName, String itemCategory){
+        this.itemName = itemName;
+        this.createdDate = new Date();
+        this.updatedDate = new Date();
     }
 
-    public String getITEM_NAME() {
-        return ITEM_NAME;
+    public Integer getItemId() {
+        return itemId;
     }
 
-    public void setITEM_NAME(String ITEM_NAME) {
-        this.ITEM_NAME = ITEM_NAME;
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
     }
 
-    public String getITEM_CATEGORY() {
-        return ITEM_CATEGORY;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setITEM_CATEGORY(String ITEM_CATEGORY) {
-        this.ITEM_CATEGORY = ITEM_CATEGORY;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
 }

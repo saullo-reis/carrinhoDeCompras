@@ -9,26 +9,51 @@ import java.util.Date;
 public class Carts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer CART_ID;
-    private String CART_NAME;
-    private Date CREATED_DATE;
-    private Date UPDATED_DATE;
-
+    private Integer cartId;
+    private String cartName;
+    private Date createdDate;
+    private Date updatedDate;
     @ManyToOne
-    @JoinColumn(name="USER_ID")
-    private Users USER_ID;
+    @JoinColumn(name="userId")
+    private Users  userId;
 
-    public Carts(String CART_NAME){
-        this.CART_NAME = CART_NAME;
-        this.CREATED_DATE = new Date();
-        this.UPDATED_DATE = new Date();
+    public Integer getCartId() {
+        return cartId;
     }
 
-    public String getCART_NAME() {
-        return CART_NAME;
+    public void setCartId(Integer cartId) {
+        this.cartId = cartId;
     }
 
-    public void setCART_NAME(String CART_NAME) {
-        this.CART_NAME = CART_NAME;
+    public String getCartName() {
+        return cartName;
+    }
+
+    public void setCartName(String cartName) {
+        this.cartName = cartName;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public Users getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 }
