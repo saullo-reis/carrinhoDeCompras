@@ -3,7 +3,6 @@ package com.cart.carrinhoDeCompras.entities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
 
@@ -15,13 +14,14 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String userName;
 
     private boolean userVip;
+    @Column(unique = true, nullable = false)
     private String userEmail;
     private String userPassword;
-
+    private String userRole;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,13 +36,22 @@ public class Users {
     public Users(){
 
     }
-    public Users(String USER_NAME, String USER_EMAIL, String USER_PASSWORD  ){
+    public Users(String userRole, String USER_NAME, String USER_EMAIL, String USER_PASSWORD  ){
         this.userEmail = USER_EMAIL;
         this.userName = USER_NAME;
         this.userVip = false;
         this.userPassword = USER_PASSWORD;
+        this.userRole = userRole;
         this.updateDate = new Date();
         this.createdDate = new Date();
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 
     public Integer getUserId() {

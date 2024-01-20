@@ -1,5 +1,6 @@
 package com.cart.carrinhoDeCompras.controllers.Items;
 
+import com.cart.carrinhoDeCompras.Response;
 import com.cart.carrinhoDeCompras.entities.Items;
 import com.cart.carrinhoDeCompras.entities.Users;
 import com.cart.carrinhoDeCompras.repositories.ItemsRepository;
@@ -19,34 +20,67 @@ public class ItemsControllers {
     private ItemsRepository itemRepository;
     @Autowired
     private UserRepository userRepository;
-
+    
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Items>> findAllItems(){
-        List<Items> result = itemRepository.findAll();
-        return ResponseEntity.status(200).body(result);
+    public ResponseEntity<?> findAllItems(){
+        try{
+            List<Items> allItems = itemRepository.findAll();
+            Response response = new Response<Items>("Sucess", "200", null, allItems);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
+
     @GetMapping("/getOneItemByName/{nameItem}")
-    public ResponseEntity<Items> findOneItem(@PathVariable String nameItem){
-        Items Item = itemRepository.findByItemName(nameItem);
-        return ResponseEntity.status(200).body(Item);
+    public ResponseEntity<?> findOneItem(@PathVariable String nameItem){
+        try{
+            Items item = itemRepository.findByItemName(nameItem);
+            if(item == null){
+                Response response = new Response<Items>(""+nameItem+" NOT FOUND", "400", item, null);
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            }
+            Response response = new Response<Items>(""+nameItem+" FOUND", "200", item, null);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.
+            INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/deleteItem/{idItem}")
+    public ResponseEntity<?> deleteItem(@PathVariable Integer idItem){
+        try{
+            Optional<Items> itemDeleted = itemRepository.findById(idItem);
+            if(itemDeleted.isEmpty()){
+                Response response = new Response<Items>("ITEM ID: "+idItem+" NOT FOUND", "400", null, null);
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            }
+            Response response = new Response<Optional<Items>>("ITEM DELETED", "200", null, null);
+            itemRepository.deleteById(idItem);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PostMapping("/registerItem/{idUser}")
-    public ResponseEntity<String> registerOneItem(@RequestBody Items items, @PathVariable Long idUser){
+    public ResponseEntity<?> registerOneItem(@RequestBody Items items, @PathVariable Integer idUser){
         Optional<Users> user = userRepository.findById(idUser);
-        Response response = new Response();
 
         if(user.isEmpty()){
-            response.setMessage("Esse usuário não existe");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response.getMessage());
+            Response response = new Response<Items>("USER NOT FOUND", "200", items, null);
+            return new ResponseEntity(response, HttpStatus.OK);
         }
-        try{
-            Items result = itemRepository.save(items);
-            response.setMessage("Item registrado");
-            return ResponseEntity.status(HttpStatus.CREATED).body(response.getMessage());
+        try{ 
+            Items itemResponse = new Items(items.getItemName(), items.getCategoryId(), items.getUserId(), items.getCartId());
+            Items result = itemRepository.save(itemResponse);
+            Response response = new Response<Items>("USER REGISTERED", "200", result, null);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }catch(Exception e){
-            throw new RuntimeException(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 }

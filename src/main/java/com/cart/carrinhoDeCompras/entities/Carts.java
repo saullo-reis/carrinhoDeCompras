@@ -11,11 +11,14 @@ public class Carts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cartId;
     private String cartName;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATED_DATE")
     private Date createdDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "UPDATED_DATE")
     private Date updatedDate;
-    @ManyToOne
-    @JoinColumn(name="userId")
-    private Users  userId;
+    @Column(unique = true, nullable = false)
+    private Integer userId;
 
     public Integer getCartId() {
         return cartId;
@@ -49,11 +52,11 @@ public class Carts {
         this.updatedDate = updatedDate;
     }
 
-    public Users getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Users userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 }
