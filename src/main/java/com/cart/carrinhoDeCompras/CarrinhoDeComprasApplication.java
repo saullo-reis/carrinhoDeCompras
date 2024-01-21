@@ -15,11 +15,6 @@ public class CarrinhoDeComprasApplication {
 		SpringApplication.run(CarrinhoDeComprasApplication.class, args);
 	}
 
-	@Bean
-	public PasswordEncoder getPasswordEncoder(){
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder;
-	}
 	@RestController
 	class HttpController{
 		@GetMapping("/")

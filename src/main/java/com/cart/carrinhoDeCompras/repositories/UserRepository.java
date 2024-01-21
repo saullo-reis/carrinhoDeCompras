@@ -1,11 +1,13 @@
 package com.cart.carrinhoDeCompras.repositories;
 
-import com.cart.carrinhoDeCompras.entities.Users;
 import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.cart.carrinhoDeCompras.entities.users.Users;
 
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<Users, Integer> {
-    public Optional<Users> findByUserName(String userName);
+    UserDetails findByUserName(String userName);
 }

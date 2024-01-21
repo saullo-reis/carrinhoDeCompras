@@ -1,8 +1,8 @@
 package com.cart.carrinhoDeCompras.controllers.cart;
 
 import com.cart.carrinhoDeCompras.Response;
-import com.cart.carrinhoDeCompras.entities.Carts;
-import com.cart.carrinhoDeCompras.entities.Users;
+import com.cart.carrinhoDeCompras.entities.carts.Carts;
+import com.cart.carrinhoDeCompras.entities.users.Users;
 import com.cart.carrinhoDeCompras.repositories.CartsRepository;
 import com.cart.carrinhoDeCompras.repositories.UserRepository;
 
@@ -66,7 +66,7 @@ public class CartControllers {
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
             cartRepository.deleteById(cartId);
-            Response response = new Response<Optional<Carts>>("CART DELETED", "400", cart, null);
+            Response response = new Response<Optional<Carts>>("CART DELETED", "200", cart, null);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

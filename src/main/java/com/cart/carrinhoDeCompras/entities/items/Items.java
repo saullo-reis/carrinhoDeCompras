@@ -1,4 +1,4 @@
-package com.cart.carrinhoDeCompras.entities;
+package com.cart.carrinhoDeCompras.entities.items;
 
 import jakarta.persistence.*;
 import org.apache.catalina.User;

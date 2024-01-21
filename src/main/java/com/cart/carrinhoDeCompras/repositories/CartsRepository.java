@@ -1,7 +1,9 @@
 package com.cart.carrinhoDeCompras.repositories;
 
-import com.cart.carrinhoDeCompras.entities.Carts;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cart.carrinhoDeCompras.entities.carts.Carts;
+
 import java.util.List;
 
 

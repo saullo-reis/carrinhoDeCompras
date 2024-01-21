@@ -1,8 +1,8 @@
 package com.cart.carrinhoDeCompras.controllers.Items;
 
 import com.cart.carrinhoDeCompras.Response;
-import com.cart.carrinhoDeCompras.entities.Items;
-import com.cart.carrinhoDeCompras.entities.Users;
+import com.cart.carrinhoDeCompras.entities.items.Items;
+import com.cart.carrinhoDeCompras.entities.users.Users;
 import com.cart.carrinhoDeCompras.repositories.ItemsRepository;
 import com.cart.carrinhoDeCompras.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.cart.carrinhoDeCompras.entities;
+package com.cart.carrinhoDeCompras.entities.category;
 
 import jakarta.persistence.*;
 

@@ -1,12 +1,12 @@
 package com.cart.carrinhoDeCompras.controllers.category;
 
-import com.cart.carrinhoDeCompras.entities.Category;
 import com.cart.carrinhoDeCompras.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.cart.carrinhoDeCompras.Response;
+import com.cart.carrinhoDeCompras.entities.category.Category;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,27 +1,35 @@
-package com.cart.carrinhoDeCompras.entities;
+package com.cart.carrinhoDeCompras.entities.users;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS")
-public class Users {
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String userName;
 
     private boolean userVip;
     @Column(unique = true, nullable = false)
     private String userEmail;
     private String userPassword;
-    private String userRole;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,21 +44,21 @@ public class Users {
     public Users(){
 
     }
-    public Users(String userRole, String USER_NAME, String USER_EMAIL, String USER_PASSWORD  ){
-        this.userEmail = USER_EMAIL;
-        this.userName = USER_NAME;
+    public Users(UserRole userRole, String userName, String userEmail, String userPassword  ){
+        this.userEmail = userEmail;
+        this.userName = userName;
         this.userVip = false;
-        this.userPassword = USER_PASSWORD;
+        this.userPassword = userPassword;
         this.userRole = userRole;
         this.updateDate = new Date();
         this.createdDate = new Date();
     }
 
-    public String getUserRole() {
+    public UserRole getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(String userRole) {
+    public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
 
@@ -108,5 +116,41 @@ public class Users {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.userRole == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getPassword() {
+        return userPassword;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
